@@ -1,7 +1,7 @@
 # main links
 main:
   - title: "About Me"
-    url: https://runhany2.github.io/
+    url: /aboutme/
   - title: "CV"
     url: /cv/
   - title: "Projects"
