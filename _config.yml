@@ -114,14 +114,14 @@ analytics:
 # Site Author
 author:
   name             : "Runhan (Brad) Yang"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "test1"
+  avatar           : "/assets/images/pic1.png"
+  bio              : "PhD student at University of Illinois Urbana-Champaign"
   location         : "Urbana, IL"
-  email            :
+  email            : "runhany2@illinois.edu"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      # url: "mailto:your.name@email.com"
+      url: "mailto:runhany2@illinois.edu"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
