@@ -20,7 +20,7 @@ rtl                      : # true, false (default) # turns direction of the page
 title                    : "Runhan (Brad) Yang"
 title_separator          : "-"
 subtitle                 : "personal website"
-name                     : "Runhan (Brad) Yang"
+name                     : "RY"
 description              : "An amazing website."
 url                      : "https://runhany2.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
