@@ -126,7 +126,7 @@ author:
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
     - label: "LinkedIn"
-      icon: "fab fa-brands fa-linkedin"
+      icon: "fab fa-fw fa-linkedin"
       url: "https://www.linkedin.com/in/runhan-brad-yang-a9292715a/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
@@ -141,9 +141,9 @@ author:
 # Site Footer
 footer:
   links:
-    - label: "Twitter"
-      icon: "fab fa-fw fa-twitter-square"
-      # url:
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://www.linkedin.com/in/runhan-brad-yang-a9292715a/"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       # url:
