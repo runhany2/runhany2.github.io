@@ -25,8 +25,7 @@ description              : "An amazing website."
 url                      : "https://runhany2.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
-header: 
-    teaser                   : "/assets/images/pic1.png"
+teaser                   : # "/assets/images/pic1.png"
 logo                     : # "/assets/images/pic1.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : # true, false (default)
@@ -311,16 +310,24 @@ compress_html:
     envs: development
 
 
-# Defaults
+# # Defaults
+# defaults:
+  # # _posts
+  # - scope:
+      # path: ""
+      # type: posts
+    # values:
+      # layout: single
+      # author_profile: true
+      # read_time: true
+      # comments: # true
+      # share: true
+      # related: true
+      
 defaults:
-  # _posts
+  # _pages
   - scope:
       path: ""
-      type: posts
+      type: pages
     values:
       layout: single
-      author_profile: true
-      read_time: true
-      comments: # true
-      share: true
-      related: true
