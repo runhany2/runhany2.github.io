@@ -1,10 +1,169 @@
 ---
-layout: single
-title: About Me
+layout: archive
+title: Hi, I'm Brad
 permalink: /aboutme/
 author_profile: true
-
+classes: wide
 ---
-page about me
 
-test update
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Research Focus</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .section {
+            font-size: 19px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            margin-bottom: 10px;
+        }
+        .list {
+            list-style: none;
+            padding-left: 20px;
+            display: none; /* Initially hide subcategories */
+        }
+        .collapsible {
+            cursor: pointer;
+            padding: 10px;
+            background: #f7f7f7;
+            border: 1px solid #d1bb91;
+            border-radius: 5px;
+            margin-bottom: 5px;
+            transition: background 0.3s;
+        }
+        .collapsible:hover {
+            background: #eaeaea;
+        }
+        .collapsible.active + .list {
+            display: block; /* Show subcategories when active */
+        }
+    </style>
+</head>
+<body>
+I am a PhD student studying cognitive psychology at the University of Illinois Urbana Champaign.
+
+    <div class="section">
+        <h2>My research focuses on</h2>
+        <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
+        
+        <div class="collapsible">Human Perception and Attention</div>
+        <ul class="list">
+            <li>How different timing and pacing manipulations can affect performance in tasks that require constant attention for searching</li>
+            <li>How individuals perceive and interpret visual illusions, such as the Müller-Lyer and Ponzo illusion</li>
+        </ul>
+        
+        <div class="collapsible">Metacognition</div>
+        <ul class="list">
+            <li>How individuals monitor and evaluate their own attentional states during tasks</li>
+            <li>How individuals use metacognition evaluation to guide strategies of their decision-making process</li>
+        </ul>
+        
+        <div class="collapsible">Decision Making</div>
+        <ul class="list">
+            <li>How individuals decide where to look at and what to choose in a recognition task</li>
+            <li>How individuals decide who to trust when responding as a group</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>I use an integrative approach that involves</h2>
+        <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
+        
+        <div class="collapsible">Behavioral Studies</div>
+        <ul class="list">
+            <li>I code studies in multiple languages, including Python (PsychoPy), Matlab (PsychToolBox), and Javascript (JsPsych).</li>
+        </ul>
+        
+        <div class="collapsible">Process Tracing Methods</div>
+        <ul class="list">
+            <li>I am familiar with running eye-tracking and EEG studies and analyzing data from those studies.</li>
+        </ul>
+        
+        <div class="collapsible">Computational Models</div>
+        <ul class="list">
+            <li>I use Drift-Diffusion Model, hierarchical model, and other latent variable models (e.g., Signal Detection Model) for analyzing and simulating data.</li>
+        </ul>
+    </div>
+
+    <script>
+        // Add collapsible functionality
+        document.querySelectorAll('.collapsible').forEach(item => {
+            item.addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+</html>
+
+
+<!--
+I am a PhD student studying cognitive psychology at the University of Illinois Urbana Champaign.
+
+<div class="section" style="font-size: 19px;">
+    <h2>My research focuses on</h2>
+    <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
+    
+	Human Perception and Attention
+    <ul class="list">
+        <li>
+		How different timing and pacing manipulations can affect performance in tasks that require constant attention for searching 
+        </li>
+		<li>
+        How individuals perceive and interpret visual illusions, such as the Müller-Lyer and Ponzo illusion
+        </li>
+	</ul>	
+	
+    Metacognition 
+	<ul class="list">
+        <li>
+        How individuals monitor and evaluate their own attentional states during tasks
+        </li>
+		<li>
+		How individuals use metacognition evaluation to guide strategies of their decision-making process
+        </li>
+	</ul>
+	
+    Decision Making
+	<ul class="list">
+        <li>
+        How individuals decide where to look at and what to choose in a recognition task 
+		</li>
+		<li>
+		How individuals decide who to trust when responding as a group  
+        </li>
+    </ul>
+</div>
+
+<div class="section" style="font-size: 19px;">
+    <h2>I use an integrative approach that involves</h2>
+    <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
+    
+	Behavioral Studies
+    <ul class="list">
+        <li>
+		I code studies in multiple languages, including Python (PsychoPy), Matlab (PsychToolBox), and Javascript (JsPsych).
+        </li>
+	</ul>	
+	
+    Process Tracing Methods
+	<ul class="list">
+        <li>
+        I am familiar with running eye-tracking and EEG studies and analyzing data from those studies. 
+        </li>
+	</ul>
+	
+    Computational Models
+	<ul class="list">
+        <li>
+        I use Drift-Diffusion Model, hierarchical model, and other latent variable models (e.g., Signal Detection Model) for analyzing and simulating data. 
+		</li>
+    </ul>
+</div>
+-->
