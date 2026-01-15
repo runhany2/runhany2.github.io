@@ -19,7 +19,7 @@ locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "Runhan (Brad) Yang"
 title_separator          : "-"
-subtitle                 : "personal website"
+subtitle                 : ""
 name                     : "RY"
 description              : "An amazing website."
 url                      : "https://runhany2.github.io"
