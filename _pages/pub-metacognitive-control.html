@@ -21,3 +21,210 @@ Journal of Experimental Psychology: Learning, Memory, & Cognition</span>
 <p style="font-size: 19px;">
 Prior research using attention-demanding tasks has shown that performance can be improved by allowing individuals to control the pacing of trials. This result suggests that people can monitor fluctuations of attention and can take advantage of this metacognitive awareness to synchronize moments with high demand to moments of heightened attention. In two experiments, we decomposed the benefits conferred by self-pacing within the context of a model of attentional capture rooted in signal detection theory. We employed a common orientation discrimination task in which set size varied across blocks of trials. Some subjects controlled the onset of each trial (self-pacing), and others did not. Model analyses revealed that self-pacing both increases target strength and decreases target variability. The between-trial wait times of self-pacing subjects supported the view that these benefits arise in part from the fact that participants appreciated the greater difficulty of larger set sizes and deployed a policy of waiting longer between trials during blocks with larger set sizes in order to offset the larger decrements associated with tasks of greater difficulty. Metacognitive control of self-pacing appears to benefit attention by enhancing the detectability of targets and by reducing the occurrence of target presentations during moments of lessened attention. (PsycInfo Database Record (c) 2025 APA, all rights reserved).
 </p>
+
+<hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
+
+<h2>The Model</h2>
+<p style="font-size: 19px;">
+To understand how self-pacing improves performance, we developed a signal-detection model of visual search in which the target's evidence on a given trial is drawn from a normal distribution N(&mu;, &sigma;), while each distractor's evidence is independently drawn from a fixed background distribution N(0, 1). On every trial, attention is captured by whichever stimulus &mdash; target or distractor &mdash; happens to yield the strongest evidence, so accuracy depends jointly on how far the target distribution is shifted from the distractor distribution (&mu;, signal strength) and how variable the target's evidence is (&sigma;, internal noise), with more distractors making that variability increasingly costly. Fitting this model separately to the self-pacing and control conditions showed that self-pacing increased &mu; and decreased &sigma;, indicating that it improves performance both by strengthening the signal and by reducing trial-to-trial noise in perception.
+</p>
+
+<h3>Equation 1</h3>
+<p style="font-size: 19px;">
+$$
+P(C) = \int_{-\infty}^{\infty} f_s(x)\, G_d^{\,n-1}(x)\, dx \;+\; 0.5\int_{-\infty}^{\infty} (n-1)\, f_d(x)\, G_d^{\,n-2}(x)\, G_s(x)\, dx
+$$
+$$
+f_d(x) \sim N(0,1), \qquad f_s(x) \sim N(\mu, \sigma)
+$$
+where <i>n</i> is set size, f<sub>d</sub> and f<sub>s</sub> are the distractor and target evidence densities, and G<sub>d</sub>, G<sub>s</sub> are their respective cumulative distribution functions. The first integral is the probability the target yields the strongest evidence (and is correctly identified); the second is the probability a distractor wins instead, yielding chance-level (0.5) performance.
+</p>
+
+<h3>Illustration: target vs. distractor distributions</h3>
+<p style="font-size: 19px;">
+Using the parameters estimated for the self-pacing condition (&mu; = 0.65, &sigma; = 1.69), the target distribution is shifted to the right of the fixed distractor distribution and only partially overlaps with it &mdash; the less overlap, the easier the target is to spot.
+</p>
+<div style="max-width: 560px; margin: 20px auto;">
+<svg id="staticIllustration" viewBox="0 0 500 300" style="width:100%; height:auto; font-family: inherit;"></svg>
+</div>
+
+<h3>Interactive: explore the model</h3>
+<p style="font-size: 19px;">
+This reproduces the logic of Figure 4 from the paper, but with a single curve you control. Drag the sliders to change the target distribution's &mu; (signal strength) and &sigma; (signal variability) &mdash; the distractor distribution stays fixed at N(0, 1) &mdash; and watch how predicted accuracy changes across set sizes.
+</p>
+<div style="max-width: 560px; margin: 20px auto;">
+	<div style="margin-bottom: 12px;">
+		<label for="muSlider" style="font-size: 16px;">Target &mu; (signal strength): <strong><span id="muValue">0.65</span></strong></label><br>
+		<input type="range" id="muSlider" min="0" max="2" step="0.01" value="0.65" style="width: 100%; accent-color: #c9762c;">
+	</div>
+	<div style="margin-bottom: 12px;">
+		<label for="sigmaSlider" style="font-size: 16px;">Target &sigma; (signal variability): <strong><span id="sigmaValue">1.69</span></strong></label><br>
+		<input type="range" id="sigmaSlider" min="0.3" max="3" step="0.01" value="1.69" style="width: 100%; accent-color: #c9762c;">
+	</div>
+	<svg id="interactivePlot" viewBox="0 0 500 320" style="width:100%; height:auto; font-family: inherit;"></svg>
+</div>
+<p style="font-size: 14px; color: #666; max-width: 560px; margin: 0 auto;">
+Distractor fixed at N(0, 1). Curve computed directly from Equation 1.
+</p>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script>
+(function() {
+	function erf(x) {
+		var sign = x >= 0 ? 1 : -1;
+		x = Math.abs(x);
+		var a1 = 0.254829592, a2 = -0.284496736, a3 = 1.421413741,
+			a4 = -1.453152027, a5 = 1.061405429, p = 0.3275911;
+		var t = 1 / (1 + p * x);
+		var y = 1 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * Math.exp(-x * x);
+		return sign * y;
+	}
+	function normPDF(x, mean, sd) {
+		return Math.exp(-0.5 * Math.pow((x - mean) / sd, 2)) / (sd * Math.sqrt(2 * Math.PI));
+	}
+	function normCDF(x, mean, sd) {
+		return 0.5 * (1 + erf((x - mean) / (sd * Math.sqrt(2))));
+	}
+	function proportionCorrect(n, mu, sigma) {
+		var dx = 0.05, xMin = -15, xMax = 20;
+		var sum1 = 0, sum2 = 0;
+		for (var x = xMin; x <= xMax; x += dx) {
+			var fd = normPDF(x, 0, 1);
+			var fs = normPDF(x, mu, sigma);
+			var Gd = normCDF(x, 0, 1);
+			var Gs = normCDF(x, mu, sigma);
+			sum1 += fs * Math.pow(Gd, n - 1) * dx;
+			sum2 += (n - 1) * fd * Math.pow(Gd, n - 2) * Gs * dx;
+		}
+		var pc = sum1 + 0.5 * sum2;
+		return Math.max(0.5, Math.min(1, pc));
+	}
+
+	function drawStaticIllustration() {
+		var svg = document.getElementById('staticIllustration');
+		var margin = { top: 20, right: 20, bottom: 40, left: 20 };
+		var width = 500 - margin.left - margin.right;
+		var height = 300 - margin.top - margin.bottom;
+		var xMin = -6, xMax = 8;
+		var mu = 0.65, sigma = 1.69;
+		var maxY = 0.45;
+
+		function sx(x) { return margin.left + (x - xMin) / (xMax - xMin) * width; }
+		function sy(y) { return margin.top + (1 - y / maxY) * height; }
+
+		var distractorPts = [], targetPts = [];
+		for (var x = xMin; x <= xMax; x += 0.1) {
+			distractorPts.push(sx(x) + ',' + sy(normPDF(x, 0, 1)));
+			targetPts.push(sx(x) + ',' + sy(normPDF(x, mu, sigma)));
+		}
+
+		var svgns = 'http://www.w3.org/2000/svg';
+		while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+		var axisX = document.createElementNS(svgns, 'line');
+		axisX.setAttribute('x1', margin.left); axisX.setAttribute('x2', margin.left + width);
+		axisX.setAttribute('y1', sy(0)); axisX.setAttribute('y2', sy(0));
+		axisX.setAttribute('stroke', '#333');
+		svg.appendChild(axisX);
+
+		var pathD = document.createElementNS(svgns, 'polyline');
+		pathD.setAttribute('points', distractorPts.join(' '));
+		pathD.setAttribute('fill', 'none');
+		pathD.setAttribute('stroke', '#222');
+		pathD.setAttribute('stroke-width', '2');
+		svg.appendChild(pathD);
+
+		var pathS = document.createElementNS(svgns, 'polyline');
+		pathS.setAttribute('points', targetPts.join(' '));
+		pathS.setAttribute('fill', 'none');
+		pathS.setAttribute('stroke', '#c9762c');
+		pathS.setAttribute('stroke-width', '2');
+		svg.appendChild(pathS);
+
+		function label(text, x, y, color) {
+			var t = document.createElementNS(svgns, 'text');
+			t.setAttribute('x', x); t.setAttribute('y', y);
+			t.setAttribute('fill', color); t.setAttribute('font-size', '14');
+			t.textContent = text;
+			svg.appendChild(t);
+		}
+		label('distractor: N(0, 1)', sx(-5.5), sy(0.42), '#222');
+		label('target: N(0.65, 1.69)', sx(1.5), sy(0.30), '#c9762c');
+		label('internal response', sx(xMax) - 90, sy(0) + 30, '#333');
+	}
+
+	function drawInteractivePlot(mu, sigma) {
+		var svg = document.getElementById('interactivePlot');
+		var margin = { top: 20, right: 20, bottom: 45, left: 50 };
+		var width = 500 - margin.left - margin.right;
+		var height = 320 - margin.top - margin.bottom;
+		var nMin = 2, nMax = 10, pMin = 0.5, pMax = 1.0;
+
+		function sx(n) { return margin.left + (n - nMin) / (nMax - nMin) * width; }
+		function sy(p) { return margin.top + (1 - (p - pMin) / (pMax - pMin)) * height; }
+
+		var svgns = 'http://www.w3.org/2000/svg';
+		while (svg.firstChild) svg.removeChild(svg.firstChild);
+
+		var yTicks = [0.5, 0.6, 0.7, 0.8, 0.9, 1.0];
+		yTicks.forEach(function(p) {
+			var gl = document.createElementNS(svgns, 'line');
+			gl.setAttribute('x1', margin.left); gl.setAttribute('x2', margin.left + width);
+			gl.setAttribute('y1', sy(p)); gl.setAttribute('y2', sy(p));
+			gl.setAttribute('stroke', '#eee');
+			svg.appendChild(gl);
+			var t = document.createElementNS(svgns, 'text');
+			t.setAttribute('x', margin.left - 8); t.setAttribute('y', sy(p) + 4);
+			t.setAttribute('text-anchor', 'end'); t.setAttribute('font-size', '12'); t.setAttribute('fill', '#333');
+			t.textContent = p.toFixed(1);
+			svg.appendChild(t);
+		});
+		var xTicks = [2, 4, 6, 8, 10];
+		xTicks.forEach(function(n) {
+			var t = document.createElementNS(svgns, 'text');
+			t.setAttribute('x', sx(n)); t.setAttribute('y', margin.top + height + 20);
+			t.setAttribute('text-anchor', 'middle'); t.setAttribute('font-size', '12'); t.setAttribute('fill', '#333');
+			t.textContent = n;
+			svg.appendChild(t);
+		});
+
+		var xLabel = document.createElementNS(svgns, 'text');
+		xLabel.setAttribute('x', margin.left + width / 2); xLabel.setAttribute('y', margin.top + height + 38);
+		xLabel.setAttribute('text-anchor', 'middle'); xLabel.setAttribute('font-size', '14'); xLabel.setAttribute('fill', '#333');
+		xLabel.textContent = 'Set size';
+		svg.appendChild(xLabel);
+
+		var yLabel = document.createElementNS(svgns, 'text');
+		yLabel.setAttribute('x', -(margin.top + height / 2)); yLabel.setAttribute('y', 14);
+		yLabel.setAttribute('text-anchor', 'middle'); yLabel.setAttribute('font-size', '14'); yLabel.setAttribute('fill', '#333');
+		yLabel.setAttribute('transform', 'rotate(-90)');
+		yLabel.textContent = 'Proportion correct';
+		svg.appendChild(yLabel);
+
+		var pts = [];
+		for (var n = nMin; n <= nMax; n += 0.5) {
+			var pc = proportionCorrect(n, mu, sigma);
+			pts.push(sx(n) + ',' + sy(pc));
+		}
+		var curve = document.createElementNS(svgns, 'polyline');
+		curve.setAttribute('points', pts.join(' '));
+		curve.setAttribute('fill', 'none');
+		curve.setAttribute('stroke', '#c9762c');
+		curve.setAttribute('stroke-width', '3');
+		svg.appendChild(curve);
+	}
+
+	function update() {
+		var mu = parseFloat(document.getElementById('muSlider').value);
+		var sigma = parseFloat(document.getElementById('sigmaSlider').value);
+		document.getElementById('muValue').textContent = mu.toFixed(2);
+		document.getElementById('sigmaValue').textContent = sigma.toFixed(2);
+		drawInteractivePlot(mu, sigma);
+	}
+
+	document.getElementById('muSlider').addEventListener('input', update);
+	document.getElementById('sigmaSlider').addEventListener('input', update);
+	drawStaticIllustration();
+	update();
+})();
+</script>
