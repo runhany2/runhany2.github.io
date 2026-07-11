@@ -7,3 +7,25 @@ search: false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
+
+/* ==========================================================================
+   Custom overrides
+   ========================================================================== */
+
+// Warm amber accent for in-content links, replacing ad-hoc inline blue links.
+// Passes WCAG AA contrast (~5.3:1) against the dirt skin's #f3f3f3 background.
+.page__content a {
+  color: #8a5a1e;
+}
+
+.page__content a:hover {
+  color: $text-color;
+}
+
+// Byline (authors/journal) on publication pages: smaller and muted relative
+// to body text, instead of a hardcoded pixel size that fought the theme's
+// responsive type scale.
+.pub-meta {
+  font-size: 0.85em;
+  color: $muted-text-color;
+}

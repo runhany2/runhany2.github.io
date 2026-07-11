@@ -6,31 +6,31 @@ author_profile: true
 classes: wide
 ---
 
-<span style="font-size:16px"><strong>Runhan Yang</strong> & Aaron S Benjamin (2025)<br>
+<span class="pub-meta"><strong>Runhan Yang</strong> & Aaron S Benjamin (2025)<br>
 Journal of Experimental Psychology: Learning, Memory, & Cognition</span>
 
 <p>
-<a href="https://doi.org/10.1037/xlm0001499" target="_blank" style="color: blue; font-size: 16px; text-decoration: underline;">DOI: 10.1037/xlm0001499</a><br>
-<a href="https://github.com/runhany2/yang_benjamin_2025_metacognitive" target="_blank" style="color: blue; font-size: 16px; text-decoration: underline;">Github link</a>
-<a href="https://osf.io/y46d7/" target="_blank" style="color: blue; font-size: 16px; text-decoration: underline;">OSF link</a>
+<a href="https://doi.org/10.1037/xlm0001499" target="_blank">DOI: 10.1037/xlm0001499</a><br>
+<a href="https://github.com/runhany2/yang_benjamin_2025_metacognitive" target="_blank">Github link</a>
+<a href="https://osf.io/y46d7/" target="_blank">OSF link</a>
 </p>
 
 <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
 
 <h2>Abstract</h2>
-<p style="font-size: 19px;">
+<p>
 Prior research using attention-demanding tasks has shown that performance can be improved by allowing individuals to control the pacing of trials. This result suggests that people can monitor fluctuations of attention and can take advantage of this metacognitive awareness to synchronize moments with high demand to moments of heightened attention. In two experiments, we decomposed the benefits conferred by self-pacing within the context of a model of attentional capture rooted in signal detection theory. We employed a common orientation discrimination task in which set size varied across blocks of trials. Some subjects controlled the onset of each trial (self-pacing), and others did not. Model analyses revealed that self-pacing both increases target strength and decreases target variability. The between-trial wait times of self-pacing subjects supported the view that these benefits arise in part from the fact that participants appreciated the greater difficulty of larger set sizes and deployed a policy of waiting longer between trials during blocks with larger set sizes in order to offset the larger decrements associated with tasks of greater difficulty. Metacognitive control of self-pacing appears to benefit attention by enhancing the detectability of targets and by reducing the occurrence of target presentations during moments of lessened attention. (PsycInfo Database Record (c) 2025 APA, all rights reserved).
 </p>
 
 <hr style="border: none; height: 4px; background: linear-gradient(to right, #d1bb91, transparent);">
 
 <h2>The Model</h2>
-<p style="font-size: 19px;">
+<p>
 To understand how self-pacing improves performance, we developed a signal-detection model of visual search in which the target's evidence on a given trial is drawn from a normal distribution N(&mu;, &sigma;), while each distractor's evidence is independently drawn from a fixed background distribution N(0, 1). On every trial, attention is captured by whichever stimulus &mdash; target or distractor &mdash; happens to yield the strongest evidence, so accuracy depends jointly on how far the target distribution is shifted from the distractor distribution (&mu;, signal strength) and how variable the target's evidence is (&sigma;, internal noise), with more distractors making that variability increasingly costly. Fitting this model separately to the self-pacing and control conditions showed that self-pacing increased &mu; and decreased &sigma;, indicating that it improves performance both by strengthening the signal and by reducing trial-to-trial noise in perception.
 </p>
 
 <h3>Equation 1</h3>
-<p style="font-size: 19px;">
+<p>
 $$
 P(C) = \int_{-\infty}^{\infty} f_s(x)\, G_d^{\,n-1}(x)\, dx \;+\; 0.5\int_{-\infty}^{\infty} (n-1)\, f_d(x)\, G_d^{\,n-2}(x)\, G_s(x)\, dx
 $$
@@ -41,7 +41,7 @@ where <i>n</i> is set size, f<sub>d</sub> and f<sub>s</sub> are the distractor a
 </p>
 
 <h3>Illustration: target vs. distractor distributions</h3>
-<p style="font-size: 19px;">
+<p>
 Using the parameters estimated for the self-pacing condition (&mu; = 0.65, &sigma; = 1.69), the target distribution is shifted to the right of the fixed distractor distribution and only partially overlaps with it &mdash; the less overlap, the easier the target is to spot.
 </p>
 <div style="max-width: 560px; margin: 20px auto;">
@@ -49,7 +49,7 @@ Using the parameters estimated for the self-pacing condition (&mu; = 0.65, &sigm
 </div>
 
 <h3>Interactive: explore the model</h3>
-<p style="font-size: 19px;">
+<p>
 This reproduces the logic of Figure 4 from the paper, but with a single curve you control. Drag the sliders to change the target distribution's &mu; (signal strength) and &sigma; (signal variability) &mdash; the distractor distribution stays fixed at N(0, 1) &mdash; and watch how predicted accuracy changes across set sizes.
 </p>
 <div style="max-width: 560px; margin: 20px auto;">
